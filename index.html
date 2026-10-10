@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>MC PVP TIER — Minecraft PvP 段位榜单</title>
+
+<!-- ===== 站点地址：mcpvptiers.com ===== -->
+<link rel="canonical" href="https://mcpvptiers.com/" />
+<meta name="description" content="MC PVP TIER — Minecraft PvP 段位排行榜。Sword / Pot / Axe / SMP / UHC / Vanilla / Mace / NPot 八大模式与综合榜单，LT5 至 HT1 段位体系。" />
+<meta name="theme-color" content="#080a0f" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="MC PVP TIER" />
+<meta property="og:url" content="https://mcpvptiers.com/" />
+<meta property="og:title" content="MC PVP TIER — Minecraft PvP 段位榜单" />
+<meta property="og:description" content="Sword / Pot / Axe / SMP / UHC / Vanilla / Mace / NPot 八大模式与综合榜单，LT5 至 HT1 段位体系。" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="MC PVP TIER — Minecraft PvP 段位榜单" />
+<meta name="twitter:description" content="Sword / Pot / Axe / SMP / UHC / Vanilla / Mace / NPot 八大模式与综合榜单。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235b8cff'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='%23081020'%3E%E2%9A%94%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   MC PVP TIER — 主题变量
+   ============================================================ */
+:root{
+  --bg:#080a0f;
+  --bg-glow-1:rgba(91,140,255,.16);
+  --bg-glow-2:rgba(232,121,249,.10);
+  --panel:#10131c;
+  --panel-2:#161a26;
+  --panel-3:#1c2130;
+  --line:#242a3b;
+  --line-soft:#1a1f2d;
+  --text:#e9edf7;
+  --text-dim:#a4adc4;
+  --muted:#6f7891;
+  --accent:#5b8cff;
+  --radius:14px;
+  --font:"Inter","Segoe UI","PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --pixel:"Silkscreen","Courier New",monospace;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(760px 460px at 12% -8%, var(--bg-glow-1), transparent 62%),
+    radial-gradient(700px 440px at 92% 4%, var(--bg-glow-2), transparent 60%),
+    linear-gradient(180deg,#0a0d14 0%, #080a0f 55%, #06080c 100%);
+}
+/* 细微的网格纹理，接近 mctiers 的科技感 */
+body::after{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.35;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(circle at 50% 0%, #000 0%, transparent 78%);
+  -webkit-mask-image:radial-gradient(circle at 50% 0%, #000 0%, transparent 78%);
+}
+.wrap{position:relative; z-index:1; max-width:1400px; margin:0 auto; padding:22px 20px 70px;}
+
+/* ============================================================
+   顶栏
+   ============================================================ */
+.topbar{
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+  padding:16px 20px;
+  background:linear-gradient(180deg, rgba(22,26,38,.92), rgba(16,19,28,.78));
+  border:1px solid var(--line);
+  border-radius:18px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 18px 50px -28px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.045);
+}
+.brand{display:flex; align-items:center; gap:14px; min-width:0;}
+.brand-mark{
+  width:48px; height:48px; flex:0 0 48px; border-radius:13px;
+  background:linear-gradient(145deg,#6ea0ff,#8b5cf6 55%,#e879f9);
+  display:grid; place-items:center; font-size:24px;
+  box-shadow:0 10px 26px -10px rgba(110,160,255,.85), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.brand h1{
+  margin:0; font-size:20px; letter-spacing:.16em; font-weight:800;
+  text-transform:uppercase; white-space:nowrap;
+}
+.brand h1 span{color:var(--accent);}
+.brand p{margin:3px 0 0; font-size:12px; color:var(--muted); letter-spacing:.05em;}
+.brand p a.site{
+  color:#9dc0ff; text-decoration:none; font-weight:600;
+  border-bottom:1px dashed rgba(157,192,255,.45);
+  transition:.15s ease;
+}
+.brand p a.site:hover{color:#cfe0ff; border-bottom-color:#9dc0ff;}
+
+/* 右上角 —— MC PVP TIER 角标 */
+.corner-badge{
+  display:flex; align-items:center; gap:10px;
+  padding:9px 16px 9px 12px;
+  border-radius:12px;
+  border:1px solid rgba(110,160,255,.45);
+  background:linear-gradient(135deg, rgba(91,140,255,.20), rgba(232,121,249,.14));
+  box-shadow:0 0 0 1px rgba(255,255,255,.03) inset, 0 12px 30px -18px rgba(91,140,255,.9);
+  white-space:nowrap;
+}
+.corner-badge .dot{
+  width:9px; height:9px; border-radius:50%; background:#5ef2a0;
+  box-shadow:0 0 10px 2px rgba(94,242,160,.85);
+  animation:pulse 1.9s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.78);}}
+.corner-badge .label{
+  font-family:var(--pixel); font-size:13px; letter-spacing:.14em;
+  color:#eaf0ff; text-shadow:0 0 16px rgba(110,160,255,.75);
+}
+.corner-badge .label b{color:#9dc0ff;}
+
+/* ============================================================
+   模式标签栏
+   ============================================================ */
+.modes{
+  display:flex; gap:8px; flex-wrap:wrap;
+  margin:20px 0 16px;
+  padding:8px;
+  background:rgba(16,19,28,.72);
+  border:1px solid var(--line);
+  border-radius:16px;
+  backdrop-filter:blur(10px);
+}
+.mode-tab{
+  appearance:none; border:1px solid transparent; cursor:pointer;
+  font-family:inherit; font-size:13.5px; font-weight:600;
+  color:var(--text-dim);
+  background:transparent;
+  padding:9px 15px; border-radius:11px;
+  display:inline-flex; align-items:center; gap:8px;
+  transition:.16s ease;
+  white-space:nowrap;
+}
+.mode-tab:hover{background:var(--panel-3); color:var(--text);}
+.mode-tab .cnt{
+  font-size:11px; font-weight:700; padding:1px 7px; border-radius:20px;
+  background:rgba(255,255,255,.08); color:var(--muted);
+}
+.mode-tab.active{
+  color:#08101f; font-weight:800;
+  background:linear-gradient(135deg,#8fb6ff,#5b8cff 60%,#7c6bff);
+  box-shadow:0 10px 24px -12px rgba(91,140,255,.95), inset 0 1px 0 rgba(255,255,255,.4);
+}
+.mode-tab.active .cnt{background:rgba(0,0,0,.22); color:#0a1220;}
+.mode-tab.overall{position:relative;}
+.mode-tab.overall.active{background:linear-gradient(135deg,#ffd76e,#f59e0b 55%,#ef4444);}
+
+/* ---- 模式图标 ---- */
+.m-ico{
+  display:block; object-fit:contain; flex:0 0 auto;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));
+  pointer-events:none;
+  -webkit-user-drag:none;
+}
+.m-ico-star{
+  display:inline-block; color:#ffd76e; flex:0 0 auto;
+  text-shadow:0 0 10px rgba(255,215,110,.6);
+}
+/* 标签栏 */
+.mode-tab .m-ico{width:20px; height:20px;}
+.mode-tab .m-ico-star{font-size:14px; line-height:1;}
+/* 综合表头 */
+.th-mode{display:inline-flex; align-items:center; justify-content:center; gap:6px;}
+.th-mode .m-ico{width:16px; height:16px; opacity:.9;}
+/* 单模式榜标题 */
+.board-title h2{display:flex; align-items:center; gap:9px;}
+.board-title h2 .m-ico{width:23px; height:23px;}
+.board-title h2 .m-ico-star{font-size:16px;}
+/* 弹窗模式明细 */
+.m-item .m-left{display:flex; align-items:center; gap:9px; min-width:0;}
+.m-item .m-ico{width:24px; height:24px;}
+
+/* ============================================================
+   工具条
+   ============================================================ */
+.toolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  flex-wrap:wrap; margin-bottom:14px;
+}
+.board-title{display:flex; align-items:baseline; gap:10px; min-width:0;}
+.board-title h2{margin:0; font-size:19px; letter-spacing:.02em;}
+.board-title .sub{font-size:12.5px; color:var(--muted);}
+.search{
+  display:flex; align-items:center; gap:8px;
+  padding:9px 13px; border-radius:11px;
+  background:var(--panel); border:1px solid var(--line);
+  transition:.16s ease;
+}
+.search:focus-within{border-color:rgba(91,140,255,.65); box-shadow:0 0 0 3px rgba(91,140,255,.14);}
+.search input{
+  appearance:none; border:0; outline:0; background:transparent;
+  color:var(--text); font-family:inherit; font-size:13.5px; width:190px;
+}
+.search input::placeholder{color:var(--muted);}
+.search svg{opacity:.55; flex:0 0 15px;}
+
+/* ============================================================
+   榜单卡片 / 表格
+   ============================================================ */
+.board{
+  background:linear-gradient(180deg, rgba(22,26,38,.88), rgba(14,17,25,.92));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 30px 70px -40px rgba(0,0,0,1), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.scroll{overflow-x:auto;}
+table{
+  width:100%; border-collapse:separate; border-spacing:0;
+  min-width:640px;
+}
+table.matrix{min-width:1080px;}
+thead th{
+  position:sticky; top:0; z-index:3;
+  font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); text-align:left;
+  padding:13px 14px;
+  background:#141826;
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+thead th.c{text-align:center;}
+thead th.r{text-align:right;}
+tbody td{
+  padding:11px 14px;
+  border-bottom:1px solid var(--line-soft);
+  vertical-align:middle;
+  font-size:14px;
+}
+tbody tr{transition:background .13s ease;}
+tbody tr:hover{background:rgba(91,140,255,.075);}
+tbody tr:last-child td{border-bottom:0;}
+
+/* 名次 */
+.rank{
+  font-family:var(--pixel); font-size:15px; font-weight:700;
+  color:var(--muted); width:66px; text-align:center;
+}
+.rank.r1{color:#ffd76e; text-shadow:0 0 14px rgba(255,215,110,.6);}
+.rank.r2{color:#d5dced; text-shadow:0 0 14px rgba(213,220,237,.5);}
+.rank.r3{color:#e8a465; text-shadow:0 0 14px rgba(232,164,101,.5);}
+.rank .tie{font-size:9px; margin-left:2px; opacity:.7; font-family:var(--font);}
+.rank i{font-style:normal; font-family:var(--font); font-size:11px; opacity:.45; margin-right:1px;}
+td.rank-cell{text-align:center;}
+
+/* 玩家单元格 */
+.player{display:flex; align-items:center; gap:12px; min-width:0;}
+.head{
+  width:38px; height:38px; flex:0 0 38px; border-radius:9px;
+  background:#0d1017; border:1px solid var(--line);
+  image-rendering:pixelated; object-fit:cover; object-position:center top;
+  transition:.16s ease;
+}
+tbody tr:hover .head{transform:scale(1.07); border-color:rgba(91,140,255,.6);}
+.p-meta{min-width:0;}
+.p-name{
+  font-weight:700; font-size:14.5px; letter-spacing:.01em;
+  cursor:pointer; display:inline-flex; align-items:center; gap:6px;
+  border-bottom:1px dashed transparent;
+  transition:.14s ease;
+  word-break:break-word;
+}
+.p-name:hover{color:#9dc0ff; border-bottom-color:rgba(157,192,255,.6);}
+.p-name .crown{font-size:12px;}
+.p-sub{font-size:11px; color:var(--muted); margin-top:2px;}
+
+/* 段位徽章 */
+.tier{
+  display:inline-block;
+  font-family:var(--pixel); font-size:11.5px; letter-spacing:.06em;
+  padding:4px 10px; border-radius:7px;
+  color:#07090e; font-weight:700;
+  background:var(--c,#666);
+  box-shadow:0 6px 16px -8px var(--c,#666), inset 0 1px 0 rgba(255,255,255,.3);
+  white-space:nowrap;
+}
+.tier.sm{font-size:10px; padding:3px 8px; border-radius:6px;}
+.tier.lg{font-size:15px; padding:8px 16px; border-radius:10px;}
+.none{color:#3d4457; font-family:var(--pixel); font-size:12px;}
+
+/* 积分 */
+td.pts{text-align:right; font-family:var(--pixel); font-size:13px; font-weight:700; color:#cfd8ee; white-space:nowrap;}
+td.pts .bar{
+  display:block; height:3px; margin-top:5px; border-radius:3px;
+  background:linear-gradient(90deg,#5b8cff,#e879f9);
+  opacity:.75; min-width:4px;
+}
+td.cell-c{text-align:center;}
+.empty{padding:52px 20px; text-align:center; color:var(--muted); font-size:14px;}
+
+/* ============================================================
+   积分规则
+   ============================================================ */
+.legend{
+  margin-top:22px; padding:18px 20px;
+  background:rgba(16,19,28,.7); border:1px solid var(--line); border-radius:var(--radius);
+}
+.legend h3{
+  margin:0 0 4px; font-size:13px; letter-spacing:.13em; text-transform:uppercase; color:var(--text-dim);
+}
+.legend p{margin:0 0 14px; font-size:12.5px; color:var(--muted);}
+.scale{display:flex; gap:8px; flex-wrap:wrap;}
+.scale-item{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  padding:9px 12px; border-radius:10px;
+  background:var(--panel-2); border:1px solid var(--line);
+  min-width:74px;
+}
+.scale-item .v{font-family:var(--pixel); font-size:11px; color:var(--text-dim);}
+.scale-item.arrow{justify-content:center; border:0; background:transparent; min-width:auto; color:var(--muted); padding:9px 2px;}
+
+/* ============================================================
+   详情弹窗
+   ============================================================ */
+.modal{
+  position:fixed; inset:0; z-index:80; display:none;
+  align-items:center; justify-content:center; padding:20px;
+}
+.modal.open{display:flex;}
+.modal-bg{
+  position:absolute; inset:0; background:rgba(4,6,10,.82);
+  backdrop-filter:blur(7px);
+  animation:fade .18s ease;
+}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
+.modal-card{
+  position:relative; width:100%; max-width:660px; max-height:90vh; overflow-y:auto;
+  background:linear-gradient(180deg,#181d2b,#10131c);
+  border:1px solid var(--line); border-radius:20px;
+  box-shadow:0 40px 90px -40px #000, inset 0 1px 0 rgba(255,255,255,.06);
+  animation:pop .2s cubic-bezier(.2,.9,.3,1.2);
+}
+@keyframes pop{from{opacity:0; transform:translateY(14px) scale(.97);}to{opacity:1; transform:none;}}
+.modal-close{
+  position:absolute; top:12px; right:12px; z-index:2;
+  width:34px; height:34px; border-radius:10px; cursor:pointer;
+  background:rgba(255,255,255,.06); border:1px solid var(--line);
+  color:var(--text-dim); font-size:17px; line-height:1;
+  display:grid; place-items:center;
+  transition:.15s ease;
+}
+.modal-close:hover{background:rgba(239,68,68,.2); color:#ff8f8f; border-color:rgba(239,68,68,.5);}
+
+.m-head{
+  display:flex; align-items:center; gap:18px;
+  padding:22px 22px 18px;
+  background:linear-gradient(135deg, rgba(91,140,255,.16), rgba(232,121,249,.09));
+  border-bottom:1px solid var(--line);
+  border-radius:20px 20px 0 0;
+}
+.m-body-img{
+  height:160px; width:auto; max-width:120px; flex:0 0 auto; object-fit:contain;
+  image-rendering:pixelated;
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.7));
+}
+.m-info{min-width:0; flex:1;}
+.m-name{
+  margin:0; font-size:25px; font-weight:800; letter-spacing:.01em;
+  word-break:break-word; line-height:1.2;
+}
+.m-sub{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-top:10px;}
+.pill{
+  font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:20px;
+  background:rgba(255,255,255,.07); border:1px solid var(--line); color:var(--text-dim);
+  white-space:nowrap;
+}
+.pill.gold{background:linear-gradient(135deg,#ffd76e,#f59e0b); color:#241703; border-color:transparent;}
+.pill.blue{background:linear-gradient(135deg,#8fb6ff,#5b8cff); color:#08101f; border-color:transparent;}
+
+.m-sec{padding:18px 22px 22px;}
+.m-sec h4{
+  margin:0 0 12px; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+}
+.m-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(184px,1fr)); gap:9px;}
+.m-item{
+  display:flex; align-items:center; justify-content:space-between; gap:9px;
+  padding:10px 12px; border-radius:11px;
+  background:var(--panel-2); border:1px solid var(--line);
+}
+.m-item.off{opacity:.42;}
+.m-item .mn{font-size:12.5px; font-weight:600; color:var(--text-dim); white-space:nowrap;}
+.m-item .mp{font-family:var(--pixel); font-size:10px; color:var(--muted); margin-top:3px; white-space:nowrap;}
+.m-stat{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:16px;
+}
+.m-stat div{
+  padding:12px; border-radius:11px; text-align:center;
+  background:var(--panel-2); border:1px solid var(--line);
+}
+.m-stat .k{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);}
+.m-stat .v{font-family:var(--pixel); font-size:17px; margin-top:6px; color:#9dc0ff;}
+
+.foot{
+  margin-top:26px; text-align:center; font-size:11.5px; color:#4b5265; letter-spacing:.06em;
+}
+.foot .foot-link{
+  color:#6f8ec4; text-decoration:none; border-bottom:1px dotted rgba(111,142,196,.5);
+  transition:.15s ease;
+}
+.foot .foot-link:hover{color:#9dc0ff; border-bottom-color:#9dc0ff;}
+
+.m-actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
+.btn{
+  appearance:none; cursor:pointer; font-family:inherit; font-size:12.5px; font-weight:600;
+  padding:8px 14px; border-radius:10px;
+  background:rgba(255,255,255,.06); border:1px solid var(--line); color:var(--text-dim);
+  transition:.15s ease; display:inline-flex; align-items:center; gap:7px;
+}
+.btn:hover{background:rgba(91,140,255,.16); border-color:rgba(91,140,255,.5); color:#bcd2ff;}
+.btn.warn:hover{background:rgba(239,68,68,.16); border-color:rgba(239,68,68,.5); color:#ff9d9d;}
+.hint{font-size:11.5px; color:var(--muted); margin-top:9px; line-height:1.6;}
+.hint code{background:rgba(255,255,255,.07); padding:1px 5px; border-radius:4px; font-size:11px;}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width:760px){
+  .wrap{padding:14px 12px 50px;}
+  .topbar{flex-direction:column; align-items:stretch; gap:12px; padding:14px;}
+  .corner-badge{align-self:flex-start;}
+  .brand h1{font-size:17px;}
+  .search input{width:100%;}
+  .search{flex:1;}
+  .m-head{flex-direction:column; align-items:flex-start; gap:12px;}
+  .m-body-img{height:118px;}
+  .m-name{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ================= 顶栏（右上角：MC PVP TIER） ================= -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">⚔</div>
+      <div>
+        <h1>PvP <span>Tiers</span></h1>
+        <p>Minecraft PvP 段位排行榜 · <a class="site" href="https://mcpvptiers.com/" target="_blank" rel="noopener">mcpvptiers.com</a></p>
+      </div>
+    </div>
+    <div class="corner-badge" title="MC PVP TIER">
+      <span class="dot"></span>
+      <span class="label">MC <b>PVP</b> TIER</span>
+    </div>
+  </header>
+
+  <!-- ================= 模式标签 ================= -->
+  <nav class="modes" id="modes"></nav>
+
+  <!-- ================= 工具条 ================= -->
+  <div class="toolbar">
+    <div class="board-title">
+      <h2 id="boardName">综合榜</h2>
+      <span class="sub" id="boardSub"></span>
+    </div>
+    <label class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path>
+      </svg>
+      <input id="search" type="search" placeholder="搜索玩家名…" autocomplete="off" />
+    </label>
+  </div>
+
+  <!-- ================= 榜单 ================= -->
+  <section class="board">
+    <div class="scroll" id="boardScroll"></div>
+  </section>
+
+  <!-- ================= 积分规则 ================= -->
+  <section class="legend">
+    <h3>积分规则 · Scoring</h3>
+    <p>段位由低到高依次为 LT5 → HT1，每提升一档积分 +0.25（参考 CNTiers / MCTiers 计分方式）。综合榜为所有模式积分之和，未上榜的模式计 0 分。</p>
+    <div class="scale" id="scale"></div>
+    <h3 style="margin-top:20px">皮肤 · Skins</h3>
+    <p>点击任意玩家名可查看详细段位，并在弹窗里点「📁 上传本地皮肤」直接选择你的 Minecraft 皮肤文件（64×64 / 64×32 原始贴图），页面会现场渲染出头部与全身。也可以把皮肤文件放进 <code>skins/</code> 目录，命名为 <code>玩家名.png</code>，会自动加载。上传过的皮肤会保存在浏览器里，下次打开仍在。</p>
+  </section>
+
+  <p class="foot">
+    MC PVP TIER ·
+    <a class="foot-link" href="https://mcpvptiers.com/" target="_blank" rel="noopener">https://mcpvptiers.com</a>
+    · 数据可在 index.html 的 <code>PLAYERS</code> 中自行修改
+  </p>
+</div>
+
+<!-- ================= 玩家详情弹窗 ================= -->
+<div class="modal" id="modal">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<script>
+/* ============================================================================
+   1) 段位与积分定义
+   ============================================================================ */
+const TIER_ORDER = ["LT5","HT5","LT4","HT4","LT3","HT3","LT2","HT2","LT1","HT1"];
+/* LT5=1   HT5=1.25  LT4=1.5  HT4=1.75  LT3=2
+   HT3=2.25 LT2=2.5   HT2=2.75 LT1=3     HT1=3.25 */
+const TIER_POINTS = {};
+TIER_ORDER.forEach(function(t, i){ TIER_POINTS[t] = +(1 + i * 0.25).toFixed(2); });
+
+const TIER_COLOR = {
+  LT5:"#7c8598", HT5:"#12b886", LT4:"#0ea5a5", HT4:"#0ea5e9", LT3:"#3b82f6",
+  HT3:"#6366f1", LT2:"#a855f7", HT2:"#e879f9", LT1:"#f59e0b", HT1:"#ef4444"
+};
+
+/* 模式（顺序：综合 → sword/pot/axe/smp/uhc/vanilla/mace/npot） */
+const MODES = [
+  { id:"overall", label:"综合",    en:"Overall",   cn:"综合榜",  ico:null },
+  { id:"sword",   label:"Sword",   en:"Sword",     cn:"剑术",    ico:"icons/sword.png"   },
+  { id:"pot",     label:"Pot",     en:"Pot",       cn:"药水",    ico:"icons/pot.png"     },
+  { id:"axe",     label:"Axe",     en:"Axe",       cn:"斧战",    ico:"icons/axe.png"     },
+  { id:"smp",     label:"SMP",     en:"SMP",       cn:"SMP",     ico:"icons/smp.png"     },
+  { id:"uhc",     label:"UHC",     en:"UHC",       cn:"UHC",     ico:"icons/uhc.png"     },
+  { id:"vanilla", label:"Vanilla", en:"Vanilla",   cn:"纯净",    ico:"icons/vanilla.png" },
+  { id:"mace",    label:"Mace",    en:"Mace",      cn:"重锤",    ico:"icons/mace.png"    },
+  { id:"npot",    label:"NPot",    en:"Nether Pot",cn:"下界药水", ico:"icons/npot.png"    }
+];
+const MODE_MAP = {}; MODES.forEach(function(m){ MODE_MAP[m.id] = m; });
+const RATED_MODES = MODES.filter(function(m){ return m.id !== "overall"; });
+
+/* 模式图标：<img> 标签串；综合榜没有图标，用星号代替 */
+function modeIconHTML(m, cls){
+  if (m.ico) return '<img class="m-ico ' + (cls || "") + '" src="' + m.ico + '" alt="" draggable="false" />';
+  if (m.id === "overall") return '<span class="m-ico-star ' + (cls || "") + '">★</span>';
+  return "";
+}
+
+/* ============================================================================
+   2) 玩家数据 —— 想改段位/加人，只改这里就行
+   tiers 里没写的模式 = 未上榜（0 分）
+   skin  可填本地图片路径（如 "skins/xxx.png"）或网络地址；留 null 则自动拉取
+   ============================================================================ */
+const PLAYERS = [
+  {
+    name: "FTU乄小风呦", seed: 1, skin: null,
+    tiers: { vanilla:"HT1", sword:"HT2", pot:"HT2", mace:"HT2", smp:"HT2", npot:"HT2" }
+  },
+  {
+    name: "TQK_Quod2Ltk", seed: 2, skin: null,
+    tiers: { vanilla:"HT1", sword:"LT1", pot:"LT3", mace:"LT4", uhc:"LT4", axe:"LT3", smp:"LT3", npot:"HT4" }
+  },
+  {
+    name: "巴迪mj67", seed: 3, skin: null,
+    tiers: { sword:"LT4", mace:"LT3", vanilla:"LT5" }
+  },
+  {
+    name: "岩浆ink", seed: 4, skin: null,
+    tiers: { vanilla:"HT5", sword:"LT5" }
+  },
+  {
+    name: "凋零千寻", seed: 5, skin: null,
+    tiers: { vanilla:"LT2" }
+  },
+  {
+    name: "冰A口C", seed: 6, skin: null,
+    tiers: { sword:"HT5" }
+  },
+  {
+    name: "that监控彳", seed: 7, skin: null,
+    tiers: { sword:"LT5" }
+  }
+];
+const MODE_COUNT = RATED_MODES.length; // 共 8 个模式
+
+/* ============================================================================
+   3) 计算
+   ============================================================================ */
+function totalPoints(p){
+  var s = 0;
+  RATED_MODES.forEach(function(m){
+    var t = p.tiers[m.id];
+    if (t && TIER_POINTS[t] != null) s += TIER_POINTS[t];
+  });
+  return +s.toFixed(2);
+}
+function bestTier(p){
+  var best = null;
+  RATED_MODES.forEach(function(m){
+    var t = p.tiers[m.id];
+    if (!t) return;
+    if (best === null || TIER_ORDER.indexOf(t) > TIER_ORDER.indexOf(best)) best = t;
+  });
+  return best;
+}
+function modeCount(p){
+  var n = 0;
+  RATED_MODES.forEach(function(m){ if (p.tiers[m.id]) n++; });
+  return n;
+}
+function scoreOf(p, mode){
+  if (mode === "overall") return totalPoints(p);
+  var t = p.tiers[mode];
+  return t ? TIER_POINTS[t] : 0;
+}
+
+/* 排序：分数降序 → 名次种子序（同分时保持给定顺序）
+   名次用「并列名次法」：同分者名次完全相同，其后的人按实际位置排
+   例：17.00 / 17.00 / 4.50  →  #1  #1  #3  */
+function rankList(mode){
+  var list = PLAYERS.filter(function(p){
+    return mode === "overall" ? true : !!p.tiers[mode];
+  }).map(function(p){
+    return { p:p, score: scoreOf(p, mode), tier: mode === "overall" ? null : p.tiers[mode] };
+  });
+  list.sort(function(a,b){ return (b.score - a.score) || (a.p.seed - b.p.seed); });
+  list.forEach(function(e, i){
+    var sameAsPrev = i > 0 && list[i-1].score === e.score;
+    e.rank = sameAsPrev ? list[i-1].rank : i + 1;
+    e.tie  = sameAsPrev || (i < list.length-1 && list[i+1].score === e.score);
+  });
+  return list;
+}
+
+/* 每个模式的上榜人数（给标签用） */
+const MODE_TOTAL = {};
+MODES.forEach(function(m){ MODE_TOTAL[m.id] = rankList(m.id).length; });
+
+/* 综合榜名次缓存：并列第一的人都会戴皇冠，弹窗也直接取这里的名次 */
+const OVERALL_LIST = rankList("overall");
+const OVERALL_RANK = {}, OVERALL_TIE = {};
+OVERALL_LIST.forEach(function(e){
+  OVERALL_RANK[e.p.name] = e.rank;
+  OVERALL_TIE[e.p.name]  = e.tie;
+});
+
+/* ============================================================================
+   4) 皮肤系统
+   ----------------------------------------------------------------------------
+   优先级：① 弹窗里手动上传（存 localStorage）
+           ② 玩家数据里的 skin 字段
+           ③ SKIN_DIR 目录下的 <玩家名>.png           ← 直接丢 64x64 皮肤文件即可
+           ④ 联网自动拉取（mc-heads → minotar → crafatar）
+           ⑤ 内置像素头像
+   ①②③ 必须是 Minecraft 的「原始皮肤贴图」（64×64 / 64×32 / 128×128），
+   页面会用 canvas 现场切出头部与全身；④⑤ 是已经渲染好的头像。
+   ============================================================================ */
+const SKIN_DIR = "skins/";        // 设为 null 可关闭本地皮肤目录
+const LS_KEY   = "mcpvptier.skins";
+
+let UPLOADED = (function(){
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || "{}"); } catch(e){ return {}; }
+})();
+function persistUploaded(){
+  try { localStorage.setItem(LS_KEY, JSON.stringify(UPLOADED)); } catch(e){}
+}
+
+/* 原始皮肤贴图的 UV 布局：[目标x, 目标y, 宽, 高, 源x, 源y, 覆盖层源x, 覆盖层源y] */
+const UV_MODERN = [
+  [4,  0,  8, 8,   8, 8,  40, 8 ],   // 头
+  [4,  8,  8, 12, 20, 20, 20, 36],   // 身体
+  [0,  8,  4, 12, 44, 20, 44, 36],   // 右臂
+  [12, 8,  4, 12, 36, 52, 52, 52],   // 左臂
+  [4,  20, 4, 12,  4, 20,  4, 36],   // 右腿
+  [8,  20, 4, 12, 20, 52,  4, 52]    // 左腿
+];
+const UV_LEGACY = [
+  [4,  0,  8, 8,   8, 8,  -1, -1],
+  [4,  8,  8, 12, 20, 20, -1, -1],
+  [0,  8,  4, 12, 44, 20, -1, -1],
+  [12, 8,  4, 12, 44, 20, -1, -1, true],  // 旧版左臂 = 右臂水平镜像
+  [4,  20, 4, 12,  4, 20, -1, -1],
+  [8,  20, 4, 12,  4, 20, -1, -1]
+];
+const UV_HEAD = [[0, 0, 8, 8, 8, 8, 40, 8]];
+
+/* 把原始皮肤贴图切成头部 / 全身，画到 canvas 上 */
+function paintSkin(canvas, img, kind){
+  var k  = (img.naturalWidth || 64) / 64;          // HD 皮肤（128×128）等比放大
+  var lg = (img.naturalHeight || 64) <= 32 * k;    // 是否为 64×32 旧版皮肤
+  var W  = kind === "head" ? 8 : 16;
+  var H  = kind === "head" ? 8 : 32;
+  var px = 5;                                      // 每个皮肤像素放大倍数
+
+  canvas.width  = W * px;
+  canvas.height = H * px;
+  var ctx = canvas.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  /* 旧版 64×32 皮肤没有覆盖层，头部也取不到帽子区域 */
+  var parts = kind === "head"
+    ? (lg ? [[0, 0, 8, 8, 8, 8, -1, -1]] : UV_HEAD)
+    : (lg ? UV_LEGACY : UV_MODERN);
+
+  function blit(sx, sy, w, h, dx, dy, mirror){
+    if (sx < 0) return;
+    if (mirror){
+      ctx.save();
+      ctx.translate((dx + w) * px, dy * px);
+      ctx.scale(-1, 1);
+      ctx.drawImage(img, sx*k, sy*k, w*k, h*k, 0, 0, w*px, h*px);
+      ctx.restore();
+    } else {
+      ctx.drawImage(img, sx*k, sy*k, w*k, h*k, dx*px, dy*px, w*px, h*px);
+    }
+  }
+
+  parts.forEach(function(p){
+    var dx = p[0], dy = p[1], w = p[2], h = p[3];
+    blit(p[4], p[5], w, h, dx, dy, false);   // 基础层
+    blit(p[6], p[7], w, h, dx, dy, false);   // 覆盖层（帽子/外套/袖子/裤腿）
+    if (p[8]) blit(p[4], p[5], w, h, dx, dy, true); // 旧版镜像
+  });
+
+  canvas.style.imageRendering = "pixelated";
+  return true;
+}
+
+/* 内置兜底头像（8×8 像素小人脸） */
+function defaultHeadSVG(){
+  var grid = ["HHHHHHHH","HSSSSSSH","SSSSSSSS","SWBSSWBS","SSSSSSSS","SSSMSSSS","SSMMMMSS","SSSSSSSS"];
+  var pal  = { H:"#3a2b1e", S:"#b98b62", W:"#f2f2f2", B:"#3556b8", M:"#7a5236" };
+  var px = 5, rects = "";
+  for (var y = 0; y < 8; y++)
+    for (var x = 0; x < 8; x++)
+      rects += '<rect x="'+(x*px)+'" y="'+(y*px)+'" width="'+px+'" height="'+px+'" fill="'+pal[grid[y][x]]+'"/>';
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">'+
+    '<rect width="40" height="40" fill="#0d1017"/>'+rects+'</svg>');
+}
+const DEFAULT_HEAD = defaultHeadSVG();
+
+/* 联网头像源 */
+function netSources(p, kind){
+  var q = encodeURIComponent(p.name);
+  return kind === "body"
+    ? ["https://mc-heads.net/body/"+q+"/right", "https://minotar.net/armor/body/"+q+"/180.png"]
+    : ["https://mc-heads.net/avatar/"+q+"/96",
+       "https://minotar.net/helm/"+q+"/96.png",
+       "https://crafatar.com/avatars/"+q+"?size=96&overlay"];
+}
+
+/* 本地原始皮肤文件路径 */
+function rawSkinUrl(p){
+  if (UPLOADED[p.name]) return UPLOADED[p.name];
+  if (p.skin)           return p.skin;
+  if (SKIN_DIR)         return SKIN_DIR + p.name + ".png";
+  return null;
+}
+
+function netNode(p, kind, cls){
+  var img = document.createElement("img");
+  img.className = cls; img.alt = p.name; img.decoding = "async";
+  img.loading = kind === "head" ? "lazy" : "eager";
+  var srcs = netSources(p, kind), i = 0;
+  img.onerror = function(){
+    i++;
+    if (i < srcs.length) img.src = srcs[i];
+    else { img.onerror = null; img.src = DEFAULT_HEAD; }
+  };
+  img.src = srcs[0];
+  return img;
+}
+
+/* 统一的皮肤节点：本地原始皮肤用 canvas 渲染，失败则退到联网头像 */
+function skinNode(p, kind, cls){
+  var raw = rawSkinUrl(p);
+  if (!raw) return netNode(p, kind, cls);
+
+  var cv = document.createElement("canvas");
+  cv.className = cls;
+  cv.width  = kind === "head" ? 40 : 80;    // 先占好位，避免布局跳动
+  cv.height = kind === "head" ? 40 : 160;
+  cv.setAttribute("role", "img");
+  cv.setAttribute("aria-label", p.name + " 的皮肤");
+
+  var fallback = function(){
+    var node = netNode(p, kind, cls);
+    if (cv.parentNode) cv.parentNode.replaceChild(node, cv);
+  };
+
+  var im = new Image();
+  im.onload = function(){
+    try { paintSkin(cv, im, kind); } catch(e){ fallback(); }
+  };
+  im.onerror = fallback;
+  im.src = raw;
+  return cv;
+}
+
+/* 上传本地皮肤文件 */
+function pickSkin(p, onDone){
+  var input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/png,image/*";
+  input.addEventListener("change", function(){
+    var f = input.files && input.files[0];
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      UPLOADED[p.name] = r.result;
+      persistUploaded();
+      if (onDone) onDone();
+    };
+    r.readAsDataURL(f);
+  });
+  input.click();
+}
+
+/* ============================================================================
+   5) 渲染
+   ============================================================================ */
+var state = { mode: "overall", q: "" };
+
+function tierBadge(tier, size){
+  if (!tier) return '<span class="none">—</span>';
+  var c = TIER_COLOR[tier] || "#666";
+  return '<span class="tier '+(size||"")+'" style="--c:'+c+'">'+tier+'</span>';
+}
+
+function playerCell(p, sub){
+  var wrap = document.createElement("div");
+  wrap.className = "player";
+  wrap.appendChild(skinNode(p, "head", "head"));
+
+  var meta = document.createElement("div");
+  meta.className = "p-meta";
+  var nm = document.createElement("span");
+  nm.className = "p-name";
+  var crown = OVERALL_RANK[p.name] === 1 ? '<span class="crown">👑</span>' : "";
+  nm.innerHTML = crown + escapeHTML(p.name);
+  nm.title = "点击查看 " + p.name + " 的详细段位";
+  nm.addEventListener("click", function(){ openModal(p); });
+  meta.appendChild(nm);
+  if (sub){
+    var s = document.createElement("div");
+    s.className = "p-sub";
+    s.textContent = sub;
+    meta.appendChild(s);
+  }
+  wrap.appendChild(meta);
+  return wrap;
+}
+
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
+  });
+}
+
+/* ---- 综合榜：每个模式一列 ---- */
+function renderOverall(list){
+  var table = document.createElement("table");
+  table.className = "matrix";
+
+  var thead = document.createElement("thead");
+  var hr = document.createElement("tr");
+  hr.innerHTML = '<th style="width:66px" class="c">#</th><th>玩家</th>' +
+    RATED_MODES.map(function(m){
+      return '<th class="c"><span class="th-mode">' + modeIconHTML(m) + m.en + '</span></th>';
+    }).join("") +
+    '<th class="r">积分</th>';
+  thead.appendChild(hr);
+  table.appendChild(thead);
+
+  var tbody = document.createElement("tbody");
+  list.forEach(function(e){
+    var tr = document.createElement("tr");
+    var rankCls = e.rank <= 3 ? " r"+e.rank : "";
+    var tdRank = document.createElement("td");
+    tdRank.className = "rank-cell";
+    tdRank.innerHTML = '<span class="rank'+rankCls+'"><i>#</i>'+e.rank+(e.tie ? '<span class="tie">=</span>' : "")+'</span>';
+    tr.appendChild(tdRank);
+
+    var tdP = document.createElement("td");
+    tdP.appendChild(playerCell(e.p, modeCount(e.p) + " / " + MODE_COUNT + " 个模式上榜"));
+    tr.appendChild(tdP);
+
+    RATED_MODES.forEach(function(m){
+      var td = document.createElement("td");
+      td.className = "cell-c";
+      td.innerHTML = tierBadge(e.p.tiers[m.id], "sm");
+      tr.appendChild(td);
+    });
+
+    var tdS = document.createElement("td");
+    tdS.className = "pts";
+    var max = list[0].score || 1;
+    tdS.innerHTML = e.score.toFixed(2) + '<span class="bar" style="width:'+Math.max(6, Math.round(e.score/max*100))+'%"></span>';
+    tr.appendChild(tdS);
+
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  return table;
+}
+
+/* ---- 单模式榜 ---- */
+function renderSingle(list, mode){
+  var table = document.createElement("table");
+  var thead = document.createElement("thead");
+  thead.innerHTML = '<tr><th style="width:66px" class="c">#</th><th>玩家</th>' +
+                    '<th class="c">段位</th><th class="r">积分</th></tr>';
+  table.appendChild(thead);
+
+  var tbody = document.createElement("tbody");
+  list.forEach(function(e){
+    var tr = document.createElement("tr");
+    var rankCls = e.rank <= 3 ? " r"+e.rank : "";
+    var tdRank = document.createElement("td");
+    tdRank.className = "rank-cell";
+    tdRank.innerHTML = '<span class="rank'+rankCls+'"><i>#</i>'+e.rank+(e.tie ? '<span class="tie">=</span>' : "")+'</span>';
+    tr.appendChild(tdRank);
+
+    var tdP = document.createElement("td");
+    tdP.appendChild(playerCell(e.p, "综合第 " + OVERALL_RANK[e.p.name] + " 名 · 总积分 " + totalPoints(e.p).toFixed(2)));
+    tr.appendChild(tdP);
+
+    var tdT = document.createElement("td");
+    tdT.className = "cell-c";
+    tdT.innerHTML = tierBadge(e.tier, "");
+    tr.appendChild(tdT);
+
+    var tdS = document.createElement("td");
+    tdS.className = "pts";
+    var max = list[0].score || 1;
+    tdS.innerHTML = e.score.toFixed(2) + '<span class="bar" style="width:'+Math.max(6, Math.round(e.score/max*100))+'%"></span>';
+    tr.appendChild(tdS);
+
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  return table;
+}
+
+function render(){
+  var mode = state.mode;
+  var list = rankList(mode);
+
+  if (state.q){
+    var q = state.q.toLowerCase();
+    list = list.filter(function(e){ return e.p.name.toLowerCase().indexOf(q) !== -1; });
+  }
+
+  /* 标签栏 */
+  var nav = document.getElementById("modes");
+  nav.innerHTML = "";
+  MODES.forEach(function(m){
+    var b = document.createElement("button");
+    b.className = "mode-tab" + (m.id === "overall" ? " overall" : "") + (m.id === mode ? " active" : "");
+    b.innerHTML = modeIconHTML(m) +
+                  "<span>" + m.label + "</span>" +
+                  ' <span class="cnt">' + MODE_TOTAL[m.id] + "</span>";
+    b.addEventListener("click", function(){
+      state.mode = m.id;
+      state.q = "";
+      document.getElementById("search").value = "";
+      render();
+      window.scrollTo({ top:0, behavior:"smooth" });
+    });
+    nav.appendChild(b);
+  });
+
+  /* 标题 */
+  var mm = MODE_MAP[mode];
+  document.getElementById("boardName").innerHTML = mode === "overall"
+    ? '<span class="m-ico-star">★</span>综合榜 · Overall'
+    : modeIconHTML(mm) + mm.en + " 榜 · " + mm.cn;
+  document.getElementById("boardSub").textContent = mode === "overall"
+    ? "全部 " + MODE_COUNT + " 个模式积分相加 · 共 " + list.length + " 人"
+    : "共 " + list.length + " 人上榜 · 未上榜计 0 分";
+
+  /* 表格 */
+  var host = document.getElementById("boardScroll");
+  host.innerHTML = "";
+  if (!list.length){
+    host.innerHTML = '<div class="empty">没有找到匹配的玩家</div>';
+    return;
+  }
+  host.appendChild(mode === "overall" ? renderOverall(list) : renderSingle(list, mode));
+}
+
+/* ---- 积分刻度尺 ---- */
+function renderScale(){
+  var host = document.getElementById("scale");
+  host.innerHTML = "";
+  TIER_ORDER.forEach(function(t, i){
+    var d = document.createElement("div");
+    d.className = "scale-item";
+    d.innerHTML = '<span class="tier sm" style="--c:'+TIER_COLOR[t]+'">'+t+'</span>' +
+                  '<span class="v">'+TIER_POINTS[t].toFixed(2)+' 分</span>';
+    host.appendChild(d);
+    if (i < TIER_ORDER.length - 1){
+      var a = document.createElement("div");
+      a.className = "scale-item arrow";
+      a.textContent = "→";
+      host.appendChild(a);
+    }
+  });
+}
+
+/* ============================================================================
+   6) 详情弹窗
+   ============================================================================ */
+function openModal(p){
+  var myRank = OVERALL_RANK[p.name];
+  var myTie  = OVERALL_TIE[p.name];
+  var total = totalPoints(p);
+  var best = bestTier(p);
+
+  var card = document.getElementById("modalCard");
+  card.innerHTML = "";
+
+  /* 头部 */
+  var head = document.createElement("div");
+  head.className = "m-head";
+  head.appendChild(skinNode(p, "body", "m-body-img"));
+
+  var info = document.createElement("div");
+  info.className = "m-info";
+  var h = document.createElement("h3");
+  h.className = "m-name";
+  h.textContent = p.name;
+  info.appendChild(h);
+
+  var sub = document.createElement("div");
+  sub.className = "m-sub";
+  sub.innerHTML =
+    '<span class="pill ' + (myRank === 1 ? "gold" : myRank <= 3 ? "blue" : "") + '">综合 #' + myRank + (myTie ? ' · 并列' : '') + '</span>' +
+    (best ? '<span class="pill">最高段位 ' + best + '</span>' : "") +
+    '<span class="pill">总积分 ' + total.toFixed(2) + '</span>' +
+    '<span class="pill">' + modeCount(p) + '/' + MODE_COUNT + ' 模式上榜</span>';
+  info.appendChild(sub);
+  head.appendChild(info);
+  card.appendChild(head);
+
+  /* 数据区 */
+  var sec = document.createElement("div");
+  sec.className = "m-sec";
+
+  var stat = document.createElement("div");
+  stat.className = "m-stat";
+  stat.innerHTML =
+    '<div><div class="k">综合排名</div><div class="v">#' + myRank + (myTie ? '=' : '') + '</div></div>' +
+    '<div><div class="k">总积分</div><div class="v">' + total.toFixed(2) + '</div></div>' +
+    '<div><div class="k">上榜模式</div><div class="v">' + modeCount(p) + '</div></div>';
+  sec.appendChild(stat);
+
+  var h4 = document.createElement("h4");
+  h4.textContent = "各模式段位明细";
+  sec.appendChild(h4);
+
+  var grid = document.createElement("div");
+  grid.className = "m-grid";
+  RATED_MODES.forEach(function(m){
+    var t = p.tiers[m.id];
+    var item = document.createElement("div");
+    item.className = "m-item" + (t ? "" : " off");
+    var left = document.createElement("div");
+    left.className = "m-left";
+    left.innerHTML = modeIconHTML(m) +
+                     '<div><div class="mn">' + m.en + '</div>' +
+                     '<div class="mp">' + (t ? TIER_POINTS[t].toFixed(2) + " 分" : "未上榜 · 0 分") + '</div></div>';
+    item.appendChild(left);
+    var right = document.createElement("div");
+    right.innerHTML = tierBadge(t, "sm");
+    item.appendChild(right);
+    grid.appendChild(item);
+  });
+  sec.appendChild(grid);
+
+  /* 皮肤操作 */
+  var actions = document.createElement("div");
+  actions.className = "m-actions";
+
+  var up = document.createElement("button");
+  up.className = "btn";
+  up.innerHTML = "📁 上传本地皮肤";
+  up.addEventListener("click", function(){
+    pickSkin(p, function(){ refreshAll(p); });
+  });
+  actions.appendChild(up);
+
+  if (UPLOADED[p.name]){
+    var clr = document.createElement("button");
+    clr.className = "btn warn";
+    clr.innerHTML = "🗑 清除已上传皮肤";
+    clr.addEventListener("click", function(){
+      delete UPLOADED[p.name];
+      persistUploaded();
+      refreshAll(p);
+    });
+    actions.appendChild(clr);
+  }
+  sec.appendChild(actions);
+
+  var hint = document.createElement("p");
+  hint.className = "hint";
+  hint.innerHTML =
+    "皮肤来源：① 你手动上传的皮肤 ② 玩家数据里的 <code>skin</code> 字段 " +
+    "③ <code>skins/" + escapeHTML(p.name) + ".png</code> ④ 联网自动获取。" +
+    "①~③ 需为 Minecraft 原始皮肤贴图（64×64 / 64×32 / 128×128），页面会现场切出头部与全身。" +
+    (UPLOADED[p.name] ? " <b>当前正在使用你上传的皮肤。</b>" : "");
+  sec.appendChild(hint);
+
+  card.appendChild(sec);
+
+  /* 关闭按钮 */
+  var btn = document.createElement("button");
+  btn.className = "modal-close";
+  btn.innerHTML = "✕";
+  btn.setAttribute("aria-label", "关闭");
+  btn.addEventListener("click", closeModal);
+  card.appendChild(btn);
+
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(){
+  document.getElementById("modal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+/* 换完皮肤后：刷新榜单头像 + 重绘弹窗 */
+function refreshAll(p){
+  render();
+  if (document.getElementById("modal").classList.contains("open")) openModal(p);
+}
+
+/* ============================================================================
+   7) 事件绑定 & 启动
+   ============================================================================ */
+document.getElementById("modal").addEventListener("click", function(e){
+  if (e.target.hasAttribute("data-close")) closeModal();
+});
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape") closeModal();
+});
+document.getElementById("search").addEventListener("input", function(e){
+  state.q = e.target.value.trim();
+  render();
+});
+
+renderScale();
+render();
+
+/* 直链：index.html?m=sword 切到某个模式；index.html?p=玩家名 打开详情弹窗 */
+(function(){
+  var params;
+  try { params = new URLSearchParams(location.search); } catch(e){ return; }
+
+  var m = params.get("m");
+  if (m && MODE_MAP[m]){ state.mode = m; render(); }
+
+  var q = params.get("p");
+  if (!q) return;
+  var p = PLAYERS.filter(function(x){ return x.name === q; })[0];
+  if (p) openModal(p);
+})();
+
+/* 调试用：控制台可查看每个人总分 */
+window.MCPVPTIER = { PLAYERS:PLAYERS, TIER_POINTS:TIER_POINTS, totalPoints:totalPoints, rankList:rankList, paintSkin:paintSkin };
+</script>
+</body>
+</html>
